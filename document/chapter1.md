@@ -103,19 +103,38 @@
     为了完成这些任务，Web应用被分为了处理器和模板引擎两部分。
 
 
-
-
-
-
-
-
-#### 其他：
+#### @7 其他：
       FTP、Telnet这类面向连接的协议则会在客户端和服务器端之间创建一个持续存在的通信信道。
       HTTP也是以纯文本的方式而不是二进制方式发送和接收数据。
       万维网之初，HTML中不能包含动态生成的内容，使用通用网关（Common Gateway Interface，CGI）是早期尝试动态生成HTML内容的技术之一。
 
-#### CGI：
+#### @8 CGI：
       CGI是一个简单的接口，它允许Web服务器与一个独立运行于Web服务器进程之外的进程进行对接。通过CGI与服务器进程对接的程序被称为CGI程序。这种程序可议使用任何编程语言编写，这也是这个接口被称为"通用"接口的原因。早期的CGI程序大多是是使用Perl编写的，向CGI程序传递输入参数都是通过设置环境变量来完成的，CGI程序在运行之后将向标准输出返回结果，服务器将这些结果传送给客户端。
+
+
+#### @9 Golang
+       go语言web应用的运行环境由net/http包直接提供，这个包和应用的源代码会一起被编译成一个可以快速部署的独立web应用。
+        如下：一个简单的web应用
+       package main
+
+       import (
+       	"fmt"
+       	"net/http"
+       )
+
+       func handler(writer http.ResponseWriter, request *http.Request) {
+       	fmt.Fprintf(writer, "hello world,%s", request.URL.Path[1:])
+       }
+
+       func main() {
+       	http.HandleFunc("/", handler)
+       	http.ListenAndServe(": 8080", nil)
+       }
+
+#### 小结：
+    1> 使用Go开发的web应用不仅具有可扩展、模块化和可维护等特性。而且使用go还能更容易地开发出性能更高的应用。
+    2> HTTP是一种简单、无状态、纯文本的客户端-服务器协议，它用于在客户端和服务器之间进行数据交换。
+    3> HTTP的请求和响应都以相同的格式进行组织，它们都由一个请求行或者响应行作为开始，后面跟一个或多个首部，最后有一个可选的主体
 
 
 
